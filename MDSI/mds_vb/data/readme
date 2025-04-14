@@ -1,1 +1,5 @@
-example data
+example data format:
+MDS script reads a struct array. Each struct involves data from one subject, including timeseries and task waveform (Vm).
+time series is a txn matrix, t is time point, n is the number of ROIs.
+Vm is a txp matrix, t is time point, p is the number of task conditions.
+In Vm, each column is a binary vector indicating whether a condition is present or not at each time point. For instance, for a vector 0 1 0 0 ..., this condition is presented at time point 2 but not in 1, 3 and 4. 
