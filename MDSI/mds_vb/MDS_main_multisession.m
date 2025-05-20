@@ -1,6 +1,6 @@
-function MDS_main(subj_id)
+function MDS_main_multisession(subj_id)
 
-addpath(genpath('/oak/stanford/groups/menon/software/spm8/'));
+addpath(genpath('spm_path')); % add spm path 
 addpath(genpath('./Library_SR/'));
 
 TR = ;
@@ -15,27 +15,22 @@ if ~exist(result_path)
 end
 
 
-% loading time series data
-file_name = '';
-data1 = load(file_name);
-fprintf('load timeseries data %s\n', file_name);
+% loading time series data from 1st session
+file_name1 = ''; 
+data1 = load(file_name1);
+fprintf('load timeseries data %s\n', file_name1);
+
+% loading time series data from 2nd session
+file_name2 = ''; 
+data2 = load(file_name2);
+fprintf('load timeseries data %s\n', file_name2);
+
+% merge multiple session data to one data structure
+data_subjects{1}.data = data1.data(subj_id);
+data_subjects{2}.data = data2.data(subj_id);
 
 % session number
-S = 1;
-
-% loading design matrix
-%design_matrix_dir = '';
-%design_file_name = '';
-%task_wv1 = load([design_matrix_dir design_file_name]);
-%fprintf('load design matrix %s\n', design_file_name);
-%
-
-%data_subjects{1} = data1;
-%data_subjects{2} = data2;
-%wv_subjects{1} = task_wv1;
-%wv_subjects{2} = task_wv2;
-
-data_subjects{1}.data = data1.data(subj_id);
+S = length(data_subjects);
 
 % setting output file
 result_fname = '';
